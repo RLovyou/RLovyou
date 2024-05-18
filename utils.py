@@ -48,7 +48,9 @@ def crop_reshape(img, x,y,z,w,h,d):
     new_image = []
     image_patch = img[z:z+d, x:x+h, y:y+w]
     for i in range(image_patch.shape[0]):
-        new_image.append(cv2.resize(image_patch[i], (256,256)))
+        # # TODO: 우리의 image가 240 x 240 이므로 240 x 240 으로 resize 해야할 것 같아서 원본을 수정함
+        # new_image.append(cv2.resize(image_patch[i], (256,256)))
+        new_image.append(cv2.resize(image_patch[i], (240,240)))
     new_image = np.array(new_image)
     return torch.tensor(new_image.reshape(1,1,new_image.shape[0], new_image.shape[1], new_image.shape[2])).float()
 
